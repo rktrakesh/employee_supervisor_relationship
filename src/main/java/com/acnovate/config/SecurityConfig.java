@@ -20,7 +20,6 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/employee/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
