@@ -4,10 +4,12 @@ import com.acnovate.entities.Employee;
 import com.acnovate.exceptions.ResourceNotFoundException;
 import com.acnovate.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +21,18 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<List<Employee>> addNewEmployeeDetails(@RequestBody Map<String, String> employeesMap) {
+    public ResponseEntity<?> addNewEmployeeDetails(@RequestBody Map<String, String> employeesMap) {
         List<Employee> employees = employeeService.addNewEmployeeDetails(employeesMap);
-        return new ResponseEntity<>(employees, HttpStatus.CREATED);
+
+        // Customize the response message
+        String message = "Employees added successfully!";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom-Message", message);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(employees);
     }
 
     @GetMapping("/{employeeName}/supervisor")
