@@ -30,7 +30,7 @@ public class EmployeeController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Custom-Message", msg);
 
-        return ResponseEntity.ok()
+        return ResponseEntity.created(URI.create("/employee/api"))
                 .headers(headers)
                 .body(msg);
     }
