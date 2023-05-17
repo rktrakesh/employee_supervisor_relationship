@@ -25,14 +25,14 @@ public class EmployeeController {
         List<Employee> employees = employeeService.addNewEmployeeDetails(employeesMap);
 
         // Customize the response message
-        String message = "Employees added successfully!";
+        String msg = "Employees added successfully!";
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Custom-Message", message);
+        headers.add("Custom-Message", msg);
 
         return ResponseEntity.ok()
                 .headers(headers)
-                .body(message);
+                .body(msg);
     }
 
     @GetMapping("/{employeeName}/supervisor")
