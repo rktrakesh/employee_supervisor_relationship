@@ -19,13 +19,13 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/employee/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
 
         http.headers().frameOptions().disable();
-        http.csrf().ignoringAntMatchers("/**");
 
         return http.build();
     }
